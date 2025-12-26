@@ -35,8 +35,9 @@ const ScoreSchema = new mongoose.Schema({
     student_uid: { type: String, required: true, ref: 'Student' }, // Reference to student's UID
 });
 
-const Student = mongoose.model('Student', UserSchema.discriminator('Student', StudentSchema));
-const Teacher = mongoose.model('Teacher', UserSchema.discriminator('Teacher', TeacherSchema));
+const User = mongoose.model('User', UserSchema); // Define base model
+const Student = User.discriminator('Student', StudentSchema);
+const Teacher = User.discriminator('Teacher', TeacherSchema);
 const Score = mongoose.model('Score', ScoreSchema);
 
 
