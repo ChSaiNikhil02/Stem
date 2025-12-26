@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments</title>
+    <link rel="stylesheet" href="css/teacher-dashboard.css">
+    <link rel="stylesheet" href="css/assignments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">STEM Exploer</div>
+            <nav class="main-nav">
+                <a href="teacher_dashboard.html">Dashboard</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <button class="logout-btn" id="logout-button">Logout</button>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="assignments-container">
+            <h1>Assign Targets</h1>
+            <div class="assign-form">
+                <input type="text" id="assignment-title" placeholder="Assignment Title">
+                <textarea id="assignment-desc" placeholder="Description"></textarea>
+                <div class="form-row">
+                    <select id="assign-to">
+                        <option value="">Assign to...</option>
+                        <option value="class">Entire Class</option>
+                        <option value="student">Specific Student</option>
+                    </select>
+                    <input type="date" id="due-date">
+                </div>
+                <button id="assign-btn">Assign</button>
+            </div>
+
+            <h2>Assigned Targets</h2>
+            <div id="assigned-list">
+                <!-- Assigned tasks will be populated here -->
+                <div class="assigned-item">
+                    <h3>Math Homework 1</h3>
+                    <p>Complete exercises 1-10 on page 50.</p>
+                    <div class="details">
+                        <span>Assigned to: Class V</span>
+                        <span>Due: 2025-12-31</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', () => {
+            fetch('/logout', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/login.html';
+                    } else {
+                        alert('Logout failed.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during logout:', error);
+                });
+        });
+    </script>
+</body>
+</html>

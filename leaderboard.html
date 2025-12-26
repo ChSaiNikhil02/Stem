@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="css/leaderboard-updated.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-title">
+            Leaderboard
+        </div>
+        <div class="user-info">
+            <a href="/student_dashboard.html" class="back-btn">Back to Dashboard</a>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="leaderboard-container">
+            <h1>Top Students</h1>
+            <table id="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be populated here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/api/leaderboard')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#leaderboard-table tbody');
+                    data.forEach((student, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${student.fullname}</td>
+                            <td>${student.class}</td>
+                            <td>${student.totalScore.toFixed(2)}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching leaderboard data:', error);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="css/teacher-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">STEM Explorer</div>
+            
+        </div>
+        <div class="header-right">
+            <button class="logout-btn" id="logout-button">Logout</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            
+
+            <div class="professor-details">
+                <div class="details-header">
+                    <h2>👨‍🏫Professor Details</h2>
+                </div>
+                <div class="details-body">
+                    <p><strong>ID:</strong> <span id="professor-id">Loading...</span></p>
+                    <p><strong>Name:</strong> <span id="professor-name">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="professor-email">Loading...</span></p>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-header">
+                    <i class="fas fa-cog"></i> <!-- Placeholder for settings icon -->
+                    <span>Settings</span>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="teacher_dashboard.html" class="nav-item active">
+                        <i class="fas fa-tachometer-alt"></i> <!-- Placeholder icon -->
+                        Dashboard
+                    </a>
+                    <a href="students.html" class="nav-item">
+                        <i class="fas fa-users"></i> <!-- Placeholder icon -->
+                        students
+                    </a>
+                    <a href="assignments.html" class="nav-item">
+                        <i class="fas fa-tasks"></i> <!-- Placeholder icon -->
+                        Assignments
+                    </a>
+                    <a href="analytics.html" class="nav-item">
+                        <i class="fas fa-chart-line"></i> <!-- Placeholder icon -->
+                        Performance Analytics
+                    </a>
+                    <a href="game_content.html" class="nav-item">
+                        <i class="fas fa-gamepad"></i> <!-- Placeholder icon -->
+                        Game Content
+                    </a>
+                    <a href="offline_resources.html" class="nav-item">
+                        <i class="fas fa-download"></i> <!-- Placeholder icon -->
+                        Offline Resources
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="welcome-banner">
+                <h1 id="welcome-message">Welcome, Professor!</h1>
+                <p>Track your students' progress and manage your STEM classes from this dashboard.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-user-graduate stat-icon"></i> <!-- Placeholder icon -->
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Total Students</p>
+                        <p class="stat-value" id="total-students-value">0</p>
+                        <p class="stat-info">Across 12 classes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-chart-bar stat-icon"></i> <!-- Placeholder icon -->
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Average Performance</p>
+                        <p class="stat-value" id="average-performance-value">0%</p>
+                        
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-clipboard-list stat-icon"></i> <!-- Placeholder icon -->
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Assignments</p>
+                        <p class="stat-value">0</p>                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon-wrapper">
+                        <i class="fas fa-check-circle stat-icon"></i> <!-- Placeholder icon -->
+                    </div>
+                    <div class="stat-content">
+                        <p class="stat-label">Completion</p>
+                        <p class="stat-value">loading...</p>                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                
+                <div class="chart-card">
+                    <h2>Class Performance</h2>
+                    <div class="chart-placeholder pie-chart">
+                        <canvas id="subjectMasteryChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h2>Subject Mastery</h2>
+                    <div class="chart-placeholder pie-chart">
+                        <canvas id="subjectMasteryPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch teacher details
+            fetch('/api/teacher-details')
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 403) {
+                            window.location.href = '/login.html'; // Redirect to login if unauthorized
+                        }
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const welcomeMessage = document.getElementById('welcome-message');
+                    const professorId = document.getElementById('professor-id');
+                    const professorName = document.getElementById('professor-name');
+                    const professorEmail = document.getElementById('professor-email');
+
+                    if (data && data.fullname) {
+                        welcomeMessage.textContent = `Welcome, Professor ${data.fullname.split(' ')[0]}!`; // Display first name
+                        professorId.textContent = data.uid;
+                        professorName.textContent = data.fullname;
+                        professorEmail.textContent = data.email;
+                    } else {
+                        welcomeMessage.textContent = `Welcome, Professor!`;
+                        professorId.textContent = 'N/A';
+                        professorName.textContent = 'N/A';
+                        professorEmail.textContent = 'N/A';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching teacher details:', error);
+                    document.getElementById('welcome-message').textContent = `Welcome, Professor!`;
+                });
+
+            // Fetch teacher dashboard stats
+            fetch('/api/teacher-dashboard-stats')
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 403) {
+                            // This case should ideally not happen if teacher-details already redirected
+                            console.warn('Unauthorized access to teacher dashboard stats.');
+                        }
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('total-students-value').textContent = data.totalStudents;
+                    document.getElementById('average-performance-value').textContent = `${data.overallAveragePerformance}%`;
+
+                    // Render class distribution pie chart
+                    const classLabels = Object.keys(data.classDistribution);
+                    const classData = Object.values(data.classDistribution);
+                    const classColors = [
+                        '#4e73df', // Blue
+                        '#1cc88a', // Green
+                        '#36b9cc', // Cyan
+                        '#f6c23e', // Yellow
+                        '#e74a3b', // Red
+                        '#858796', // Gray
+                        '#fd7e14'  // Orange
+                    ];
+
+                    new Chart(document.getElementById('subjectMasteryChart'), {
+                        type: 'pie',
+                        data: {
+                            labels: classLabels,
+                            datasets: [{
+                                data: classData,
+                                backgroundColor: classColors.slice(0, classLabels.length),
+                                hoverBackgroundColor: classColors.slice(0, classLabels.length),
+                                hoverBorderColor: "rgba(234, 236, 244, 1)",
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            tooltips: {
+                                backgroundColor: "rgb(255,255,255)",
+                                bodyFontColor: "#858796",
+                                borderColor: '#dddfeb',
+                                borderWidth: 1,
+                                xPadding: 15,
+                                yPadding: 15,
+                                displayColors: false,
+                                caretPadding: 10,
+                            },
+                            legend: {
+                                display: true,
+                                position: 'bottom',
+                            },
+                            cutoutPercentage: 80,
+                        },
+                    });
+
+                    // Render subject mastery pie chart
+                    const subjectLabels = Object.keys(data.subjectMastery);
+                    const subjectData = Object.values(data.subjectMastery);
+                    const subjectColors = [
+                        '#4e73df', // Blue
+                        '#1cc88a', // Green
+                        '#36b9cc', // Cyan
+                        '#f6c23e', // Yellow
+                        '#e74a3b', // Red
+                        '#858796', // Gray
+                        '#fd7e14'  // Orange
+                    ];
+
+                    new Chart(document.getElementById('subjectMasteryPieChart'), {
+                        type: 'pie',
+                        data: {
+                            labels: subjectLabels,
+                            datasets: [{
+                                data: subjectData,
+                                backgroundColor: subjectColors.slice(0, subjectLabels.length),
+                                hoverBackgroundColor: subjectColors.slice(0, subjectLabels.length),
+                                hoverBorderColor: "rgba(234, 236, 244, 1)",
+                            }],
+                        },
+                        options: {
+                            maintainAspectRatio: false,
+                            tooltips: {
+                                backgroundColor: "rgb(255,255,255)",
+                                bodyFontColor: "#858796",
+                                borderColor: '#dddfeb',
+                                borderWidth: 1,
+                                xPadding: 15,
+                                yPadding: 15,
+                                displayColors: false,
+                                caretPadding: 10,
+                            },
+                            legend: {
+                                display: true,
+                                position: 'bottom',
+                            },
+                            cutoutPercentage: 80,
+                        },
+                    });
+
+                })
+                .catch(error => {
+                    console.error('Error fetching teacher dashboard stats:', error);
+                    document.getElementById('total-students-value').textContent = 'N/A';
+                    document.getElementById('average-performance-value').textContent = 'N/A';
+                });
+
+
+            // Logout functionality
+            const logoutButton = document.getElementById('logout-button');
+            logoutButton.addEventListener('click', () => {
+                fetch('/logout', { method: 'POST' })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/login.html';
+                        } else {
+                            alert('Logout failed.');
+                            console.error('Logout failed.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error during logout:', error);
+                        alert('Error during logout.');
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

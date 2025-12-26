@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="css/student-dashboard.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-title">
+            Student Dashboard
+        </div>
+        <div class="user-info">
+            <span class="user-name">Welcome, <span id="user-fullname"></span></span>
+            <a href="/leaderboard.html" class="leaderboard-btn">Leaderboard</a>
+            <a href="/login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="sidebar">
+            <div class="student-details">
+                <div class="progress-container">
+                    <div class="circular-progress">
+                        <div class="progress-value">0</div>
+                    </div>
+                    <div class="progress-label">Student score</div>
+                </div>
+                <div class="student-info">
+                    <h2>STUDENT DETAILS</h2>
+                    <p><strong>Full Name:</strong> <span id="student-fullname"></span></p>
+                    <p><strong>Email:</strong> <span id="student-email"></span></p>
+                    <p><strong>Class:</strong> <span id="student-class"></span></p>
+                </div>
+            </div>
+
+            <div  class="sidebar-leaderboard">
+                <div class="tt">
+                <h3>TOP STUDENTS</h3>
+                <a href="/leaderboard.html" class="leader-btn"><img src="images/enlarge.png" alt=""></a>
+                    </div>
+
+                <table id="sidebar-leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="subject-grid">
+                <a href="math.html" class="subject-card" style="background-color: #eef7ff;">
+                    <div class="subject-icon"><img src="images/math.png" alt="Math"></div>
+                </a>
+                <a href="#" class="subject-card" style="background-color: #e5f9f0;">
+                    <div class="subject-icon"><img src="images/science.png" alt="Science"></div>
+                </a>
+                <a href="social.html" class="subject-card" style="background-color: #fff8e1;">
+                    <div class="subject-icon"><img src="images/social.png" alt="History"></div>
+                </a>
+                <a href="english.html" class="subject-card" style="background-color: #fdeee4;">
+                    <div class="subject-icon"><img src="images/english.png" alt="English"></div>
+                </a>
+                <a href="physics.html" class="subject-card" style="background-color: #f0ebff;">
+                    <div class="subject-icon"><img src="images/physics.png" alt="Physics"></div>
+                </a>
+                <a href="#" class="subject-card" style="background-color: #e5f9f0;">
+                    <div class="subject-icon"><img src="images/chemistry.png" alt="Chemistry"></div>
+                </a>
+                <a href="biology.html" class="subject-card" style="background-color: #eef7ff;">
+                    <div class="subject-icon"><img src="images/biology.png" alt="Biology"></div>
+                </a>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const circularProgress = document.querySelector('.circular-progress');
+            const progressValue = document.querySelector('.progress-value');
+            const userFullname = document.getElementById('user-fullname');
+            const studentFullname = document.getElementById('student-fullname');
+            const studentEmail = document.getElementById('student-email');
+            const studentClass = document.getElementById('student-class');
+
+            fetch('/api/student-details')
+                .then(response => response.json())
+                .then(data => {
+                    userFullname.textContent = data.fullname;
+                    studentFullname.textContent = data.fullname;
+                    studentEmail.textContent = data.email;
+                    studentClass.textContent = data.class;
+                })
+                .catch(error => {
+                    console.error('Error fetching student details:', error);
+                });
+
+            fetch('/api/average-scores')
+                .then(response => response.json())
+                .then(data => {
+                    const averageScore = parseFloat(data.total_average);
+                    if (averageScore > 0) {
+                        let startValue = 0;
+                        const endValue = averageScore;
+                        const animationDuration = 1500; // ms
+                        const framesPerSecond = 60;
+                        const intervalTime = 1000 / framesPerSecond;
+                        const increment = endValue / (animationDuration / intervalTime);
+
+                        const progressAnimation = setInterval(() => {
+                            startValue += increment;
+
+                            if (startValue >= endValue) {
+                                startValue = endValue;
+                                clearInterval(progressAnimation);
+                            }
+
+                            const displayValue = startValue.toFixed(2);
+                            const progressPercentage = (Math.min(startValue, 100) / 100) * 360;
+
+                            progressValue.textContent = displayValue;
+                            circularProgress.style.background = `conic-gradient(#4e73df ${progressPercentage}deg, #ededed 0deg)`;
+
+                        }, intervalTime);
+
+                    } else {
+                        progressValue.textContent = '0';
+                    }
+                    for (const subject in data.subject_averages) {
+                        const scoreElement = document.querySelector(`.${subject}-score`);
+                        if (scoreElement) {
+                            scoreElement.textContent = `Score: ${data.subject_averages[subject].avg_score}`;
+                        }
+                        const progressBar = document.querySelector(`.${subject}-progress`);
+                        if (progressBar) {
+                            progressBar.style.width = `${data.subject_averages[subject].avg_score}%`;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching average scores:', error);
+                });
+
+            // Fetch and populate sidebar leaderboard
+            fetch('/api/leaderboard')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#sidebar-leaderboard-table tbody');
+                    // Display top 5 students in the sidebar leaderboard
+                    data.slice(0, 5).forEach((student, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${student.fullname}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching sidebar leaderboard data:', error);
+                });
+
+        });
+    </script>
+</body>
+</html>

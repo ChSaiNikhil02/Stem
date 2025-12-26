@@ -1,0 +1,66 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    /* Flexbox centering removed to allow for top-right positioning of elements */
+    text-align: center;
+}
+
+body {
+    /* IMPORTANT: Replace 'your-background-image.jpg' with the actual name of your image file. */
+    /* Place your image inside the 'images' folder. */
+    background-image: url('../images/landingpage.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* body::before overlay removed for a brighter appearance */
+
+.container {
+    /* z-index removed as it's no longer needed */
+}
+
+/* Header styles removed as header is no longer on the page */
+
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 1.5rem;
+    z-index: 10; /* Ensure buttons are on top */
+}
+
+.btn {
+    padding: 15px 40px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 50px; /* Pill shape */
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4); /* Add text shadow for readability */
+}
+
+.login-btn {
+    background: linear-gradient(to bottom, #29c6ff, #00a2ff);
+    border-color: #0077b3;
+}
+
+.register-btn {
+    background: linear-gradient(to bottom, #dcbaff, #b088ff);
+    border-color: #8a5ac8;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}

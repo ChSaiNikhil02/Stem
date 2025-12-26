@@ -1,0 +1,221 @@
+/* Student Dashboard styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-header {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.tt {
+    display:flex;
+}
+
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    margin-right: 20px;
+    font-size: 16px;
+    color: #555;
+}
+h3{
+    margin-right: 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #555;
+}
+.leader-btn img {
+    text-decoration: none;
+    color: #fff;
+    width: 25px;
+    height: 25px;
+    padding:  12px;
+    border-radius: 5px;
+  
+    
+}
+.leaderboard-btn, .logout-btn {
+    text-decoration: none;
+    color: #fff;
+    background-color: #4e73df;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.dashboard-main {
+    display: flex;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.student-details {
+    text-align: center;
+}
+
+.progress-container {
+    margin-bottom: 20px;
+}
+
+.circular-progress {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#4e73df 0deg, #ededed 0deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.progress-value {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+}
+
+.progress-label {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.student-info {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.student-info h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.student-info p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.subject-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+}
+
+.subject-icon img {
+    width: 160px;
+    height: 160px;
+    border-radius: 5px;
+}
+
+.subject-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.subject-score {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 10px;
+    background-color: #4e73df;
+    border-radius: 5px;
+    transition: width 1.5s ease-in-out;
+}
+
+/* Sidebar Leaderboard styles */
+.sidebar-leaderboard {
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-leaderboard h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+#sidebar-leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#sidebar-leaderboard-table th, #sidebar-leaderboard-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#sidebar-leaderboard-table th {
+    background-color: #f7f7f7;
+    font-weight: bold;
+    color: #555;
+}
+
+#sidebar-leaderboard-table tbody tr:hover {
+    background-color: #f1f1f1;
+}

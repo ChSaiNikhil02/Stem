@@ -1,0 +1,209 @@
+/* General Setup */
+body {
+    font-family: 'Roboto Slab', serif;
+    background-color: #f0f7f4;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+header h1 {
+    color: #1a535c;
+}
+
+/* Stats Container */
+#stats-container {
+    background-color: #e8f1ee;
+    border: 1px solid #d0e0d9;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 15px auto;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    font-size: 1.1em;
+}
+#stats-container span {
+    margin: 0 15px;
+    color: #1a535c;
+    font-weight: bold;
+}
+
+/* Game Board Layout - UPDATED */
+#game-board {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 500; /* Space between organ bin and skeleton */
+    margin-top: 20px;
+}
+
+/* Organ Bin Styling - UPDATED */
+#organ-bin {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 0px;
+    width: 90%;
+    max-width: 800px;
+    order: 1; /* Make this the first item */
+}
+
+#organ-bin h2 {
+    margin-top: 0;
+    color: #4ecdc4;
+    border-bottom: 2px solid #f0f7f4;
+    padding-bottom: 0px;
+}
+
+/* Organ Container - UPDATED */
+.organ-container {
+    display: flex;
+    flex-direction: row; /* Organs are in a row */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow organs to wrap to the next line if needed */
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.organ {
+    width: 100px; /* Slightly smaller for the top bar */
+    height: auto;
+    cursor: grab;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.organ:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.5);
+}
+
+.organ.dragging {
+    cursor: grabbing;
+    opacity: 0.5;
+    transform: scale(1.2);
+}
+
+/* Skeleton Area - UPDATED */
+#skeleton-area {
+    position: relative;
+    width: 550px;
+    height: 825px;
+    order: 2; /* Make this the second item */
+}
+
+#skeleton-img {
+    width: 100%;
+   
+    height: 1000px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Drop Zone Styling */
+.drop-zone {
+    position: absolute;
+    border: 2px dashed transparent; /* Invisible by default */
+    border-radius: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Visible only in debug mode */
+.drop-zone.debug-visible {
+    border: 2px dashed red;
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.drop-zone.hover {
+    background-color: rgba(78, 205, 196, 0.2);
+    border-color: #4ecdc4;
+}
+
+.drop-zone.correct {
+    /* border-color: rgba(42, 157, 143, 0.5); */
+    background-color: rgba(42, 157, 143, 0.2);
+    pointer-events: none; /* Fix for overlapping zones */
+}
+
+.drop-zone.correct .organ {
+    transform: scale(1);
+    box-shadow: none;
+    cursor: default;
+}
+
+/* Rule to resize organ after it's placed in a zone */
+.drop-zone .organ {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* --- ADJUSTABLE POSITIONS (SCALED UP) --- */
+#brain-zone   { top: 170px; left: 249px; width: 52px; height: 25px;}
+#eyes-zone    { top: 200px; left: 250px; width: 49px; height: 20px; }
+
+#ear-zone    { top: 210px; left: 235px; width: 20px; height: 20px; }
+
+#nose-zone    { top: 220px; left: 269px; width: 10px; }
+#lips-zone    { top: 233px; left: 266px; width: 17px; }
+
+#lungs-zone   { top: 285px; left: 230px; width: 90px; height: 95px; }
+#heart-zone   { top: 282px; left: 255px; width: 66px; height: 66px; }
+#kidney-zone  { top: 440px; left: 280px; width: 35px; height: 40px; }
+#liver-zone  { top: 400px; left: 235px; width: 45px; height: 40px; }
+#hand-zone    { top: 375px; left: 72px;  height: 190px; }
+#leg-zone     { top: 638px; left: 203px; width: 73px; }
+
+
+/* Footer and Controls */
+footer {
+    margin-top: 30px;
+}
+
+#debug-controls {
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+#status-message {
+    font-size: 1.2em;
+    color: #1a535c;
+    min-height: 25px;
+    font-weight: bold;
+}
+
+#reset-button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    /* transition: background-color 0.2s; */
+    margin-top: 10px;
+}
+
+#reset {
+    pointer-events: auto;
+    z-index: 10; /* above overlays */
+
+     background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+#reset:hover {
+    background-color: #ee5252;
+}

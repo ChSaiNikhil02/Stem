@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Resources</title>
+    <link rel="stylesheet" href="css/teacher-dashboard.css">
+    <link rel="stylesheet" href="css/offline_resources.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">STEM Exploer</div>
+            <nav class="main-nav">
+                <a href="teacher_dashboard.html">Dashboard</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <button class="logout-btn" id="logout-button">Logout</button>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="offline-resources-container">
+            <h1>Offline Resources</h1>
+            <ul class="resource-list">
+                <li class="resource-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <a href="#" download>Maths Worksheet - Chapter 1.pdf</a>
+                </li>
+                <li class="resource-item">
+                    <i class="fas fa-file-video"></i>
+                    <a href="#" download>Physics Experiment - Gravity.mp4</a>
+                </li>
+                <li class="resource-item">
+                    <i class="fas fa-file-alt"></i>
+                    <a href="#" download>Chemistry Notes - Periodic Table.txt</a>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', () => {
+            fetch('/logout', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/login.html';
+                    } else {
+                        alert('Logout failed.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during logout:', error);
+                });
+        });
+    </script>
+</body>
+</html>

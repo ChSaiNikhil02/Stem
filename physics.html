@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Games</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/games.css">
+</head>
+<style>
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        
+        border-bottom: 1px solid #ddd;
+    }
+    .logout-btn {
+        background-color: #ff4d4d;
+        color: white;
+        
+        padding: 8px 16px;
+        border-radius: 4px;
+        
+    }
+
+</style>
+<body>
+    <header class="dashboard-header">
+        <div class="header-title">
+            <a href="student_dashboard.html" class="back-btn">🔙</a>
+        </div>
+        <div class="user-info">
+            <a href="/login.html" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <h1>Physics Games</h1>
+        <div class="straight-progress-container">
+            <div class="progress-bar-label">
+                SUBJECT SCORE: <span class="subject-score-value">Loading...</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-bar-fill">0%</div>
+            </div>
+        </div>
+        <div class="game-grid">
+            <a href="games/sink-float/index.html" class="game-card">
+                <div class="game-icon">
+                    <img src="images/sink-float.png" alt="Float Sink Game">
+                </div>
+                <div class="game-name"></div>
+            </a>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBarFill = document.querySelector('.progress-bar-fill');
+            const scoreValueSpan = document.querySelector('.subject-score-value');
+
+            fetch('/api/average-scores')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.subject_averages.physics) {
+                        const avgScore = parseFloat(data.subject_averages.physics.avg_score) || 0;
+                        
+                        scoreValueSpan.textContent = avgScore.toFixed(2);
+                        
+                        setTimeout(() => {
+                            const percentage = Math.min(avgScore, 100); 
+                            progressBarFill.style.width = percentage + '%';
+                            progressBarFill.textContent = avgScore.toFixed(2);
+                        }, 100);
+                    } else {
+                        scoreValueSpan.textContent = 'N/A';
+                        progressBarFill.style.width = '0%';
+                        progressBarFill.textContent = '0%';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching average score:', error);
+                    scoreValueSpan.textContent = 'Error';
+                });
+        });
+    </script>
+</body>
+</html>

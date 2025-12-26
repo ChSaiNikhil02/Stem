@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - STEMify</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register</h2>
+        <form action="/register" method="POST">
+            <div class="input-group">
+                <label>Register as:</label>
+                <div class="radio-group">
+                    <input type="radio" id="student" name="user_type" value="student" checked>
+                    <label for="student">Student</label>
+                    <input type="radio" id="teacher" name="user_type" value="teacher">
+                    <label for="teacher">Teacher</label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="uid">Unique ID</label>
+                <input type="text" id="uid" name="uid" required>
+            </div>
+            <div class="input-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div id="student-class-group" class="input-group">
+                <label for="class">Class</label>
+                <select id="class" name="class">
+                    <option value="6">VI</option>
+                    <option value="7">VII</option>
+                    <option value="8">VIII</option>
+                    <option value="9">IX</option>
+                    <option value="10">X</option>
+                    <option value="11">XI</option>
+                    <option value="12">XII</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit" class="btn register-btn">Register</button>
+        </form>
+        <div class="form-footer">
+            <a href="index.html">Back to Home</a>
+        </div>
+    </div>
+    <script src="js/register.js"></script>
+</body>
+</html>

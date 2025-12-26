@@ -1,0 +1,99 @@
+/* Center the form container on the page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5em;
+    background: rgba(0, 0, 0, 0.3); /* Darker, semi-transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.form-container h2 {
+    margin-bottom: 1em;
+    font-size: 2rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.input-group {
+    margin-bottom: 1.5em;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #eee;
+    font-weight: bold;
+    text-align: left;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box; /* Important for padding and width */
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #00a2ff;
+    box-shadow: 0 0 5px rgba(0, 162, 255, 0.5);
+}
+
+/* Style for radio buttons */
+.radio-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.radio-group input[type="radio"] {
+    width: auto; /* Override full width */
+}
+
+.radio-group label {
+    margin-bottom: 0; /* Override default margin */
+    font-weight: normal;
+}
+
+/* Make placeholder text lighter */
+::placeholder {
+    color: #ccc;
+    opacity: 1;
+}
+
+.form-container .btn {
+    width: 100%;
+    margin-top: 1em;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1.5em;
+}
+
+.form-footer a {
+    color: #00EFFF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.form-footer a:hover {
+    color: #fff;
+}

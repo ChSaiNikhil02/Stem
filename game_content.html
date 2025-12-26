@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Content</title>
+    <link rel="stylesheet" href="css/teacher-dashboard.css">
+    <link rel="stylesheet" href="css/game_content.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo">STEM Exploer</div>
+            <nav class="main-nav">
+                <a href="teacher_dashboard.html">Dashboard</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <button class="logout-btn" id="logout-button">Logout</button>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="game-content-container">
+            <h1>Game Content</h1>
+            <div class="game-grid">
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Math+Wizards" alt="Math Wizards">
+                    <div class="game-info">
+                        <h3>Math Wizards</h3>
+                        <p>A fun game to practice algebra and geometry.</p>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Science+Explorers" alt="Science Explorers">
+                    <div class="game-info">
+                        <h3>Science Explorers</h3>
+                        <p>Explore the world of physics and chemistry through experiments.</p>
+                    </div>
+                </div>
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x200.png?text=Code+Breakers" alt="Code Breakers">
+                    <div class="game-info">
+                        <h3>Code Breakers</h3>
+                        <p>Learn the basics of programming with this puzzle game.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', () => {
+            fetch('/logout', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/login.html';
+                    } else {
+                        alert('Logout failed.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during logout:', error);
+                });
+        });
+    </script>
+</body>
+</html>

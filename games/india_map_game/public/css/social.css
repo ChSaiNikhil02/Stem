@@ -1,0 +1,157 @@
+#game-container {
+    background-color: #e3f2fd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 900px; /* Increased max-width for map */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; /* For absolute positioning of elements */
+}
+
+#timer, #score, #level {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#question-display {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#question-text {
+    font-size: 1.4em;
+    color: #1976d2;
+    margin-bottom: 15px;
+}
+
+#map-area {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Max width for the map image */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#map-image {
+    width: 50%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#drop-targets-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.drop-target {
+    position: absolute;
+    /* background-color: rgba(255, 0, 0, 0.2); /* For debugging drop targets */
+    border: 1px dashed transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.drop-target.highlight {
+    border: 2px dashed #2196f3;
+    background-color: rgba(33, 150, 243, 0.2);
+}
+
+.drop-target.correct {
+    background-color: rgba(76, 175, 80, 0.3);
+    border: 2px solid #4CAF50;
+}
+
+.drop-target.incorrect {
+    background-color: rgba(244, 67, 54, 0.3);
+    border: 2px solid #f44336;
+}
+
+#draggable-names-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    min-height: 50px; /* To ensure it takes space even if empty */
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.draggable-item {
+    background-color: #90caf9;
+    color: #1a237e;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: grab;
+    transition: background-color 0.3s ease;
+    z-index: 100; /* Ensure draggables are above map */
+}
+
+.draggable-item:hover {
+    background-color: #64b5f6;
+}
+
+.draggable-item.dragging {
+    opacity: 0.6;
+    border: 2px dashed #1a237e;
+}
+
+#hint-btn {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#hint-btn:hover {
+    background-color: #fb8c00;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+#next-level-btn, #play-again-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#next-level-btn:hover, #play-again-btn:hover {
+    background-color: #43a047;
+}

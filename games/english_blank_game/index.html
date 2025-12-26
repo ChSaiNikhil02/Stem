@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blank Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="english.css">
+</head>
+<body>
+    <main>
+        <h2>Grammar Test</h2>
+        <div id="game-container">
+            <div id="timer">Time: 60s</div>
+            <div id="score">Score: 0</div>
+            <div id="question-counter">Question: 0/10</div>
+            <div id="question-display">
+                <p id="sentence"></p>
+                <input type="text" id="answer-input" placeholder="Type your answer here">
+            </div>
+            <div id="options" style="display: none;"></div>
+            <button id="submit-btn">Submit</button>
+            <button id="hint-btn" style="background-color: #ff9800;">Hint</button>
+            <button id="skip-btn" style="background-color: #607d8b;">Skip</button>
+            <div id="message"></div>
+            <button id="play-again-btn" style="display: none;">Play Again</button>
+        </div>
+    </main>
+    <script src="english.js"></script>
+</body>
+</html>

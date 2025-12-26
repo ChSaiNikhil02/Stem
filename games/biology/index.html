@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy Fix-Up Game</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Anatomy Fix-Up!</h1>
+        <p>Drag the organs to their correct place on the body.</p>
+        <div id="stats-container">
+            <span>Time: <span id="timer">0</span>s</span>
+            <span>Score: <span id="score">0</span></span>
+        </div>
+    </header>
+    
+    <main id="game-board">
+        <div id="organ-bin">
+            <h2>Available Organs</h2>
+            <div class="organ-container">
+                <img src="brain.png" alt="Brain" class="organ" draggable="true" id="brain">
+                <img src="eyes.png" alt="Eyes" class="organ" draggable="true" id="eyes">
+                <img src="Heart.png" alt="Heart" class="organ" draggable="true" id="heart">
+                <img src="lungs.png" alt="Lungs" class="organ" draggable="true" id="lungs">
+                <img src="kidney.png" alt="Kidney" class="organ" draggable="true" id="kidney">
+
+                <img src="ear.png" alt="Ear" class="organ" draggable="true" id="ear">
+                <img src="hand.png" alt="Hand" class="organ" draggable="true" id="hand">
+                <img src="nose.png" alt="Nose" class="organ" draggable="true" id="nose">
+                <img src="leg.png" alt="Leg" class="organ" draggable="true" id="leg">
+                <img src="lever.png" alt="Liver" class="organ" draggable="true" id="liver">
+
+
+                <img src="lips.png" alt="Lips" class="organ" draggable="true" id="lips">
+             
+            </div>
+        </div>
+
+        <div id="skeleton-area">
+            <img src="body.png" alt="Body outline" id="skeleton-img">
+            <!-- Drop Zones -->
+            <div class="drop-zone" data-organ="brain" id="brain-zone"></div>
+            <div class="drop-zone" data-organ="eyes" id="eyes-zone"></div>
+            <div class="drop-zone" data-organ="heart" id="heart-zone"></div>
+            <div class="drop-zone" data-organ="lungs" id="lungs-zone"></div>
+            <div class="drop-zone" data-organ="kidney" id="kidney-zone"></div>
+
+            <div class="drop-zone" data-organ="ear" id="ear-zone"></div>
+            <div class="drop-zone" data-organ="hand" id="hand-zone"></div>
+            <div class="drop-zone" data-organ="nose" id="nose-zone"></div>
+            <div class="drop-zone" data-organ="leg" id="leg-zone"></div>
+            <div class="drop-zone" data-organ="liver" id="liver-zone"></div>
+
+            <div class="drop-zone" data-organ="lips" id="lips-zone"></div>
+           
+        </div>
+    </main>
+
+   <footer>
+    <div id="debug-controls">
+        <label><input type="checkbox" id="debug-toggle"> Show Fitting Zones</label>
+    </div>
+    <p id="status-message">Drag an organ to start the game!</p>
+    <button id="reset" style="position: relative; z-index: 1000;">Reset Game</button>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

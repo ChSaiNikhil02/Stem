@@ -1,0 +1,329 @@
+{
+  "students": [
+    {
+      "uid": "12",
+      "fullname": "CH.Sainikhil",
+      "email": "nikhil02@gmail.com",
+      "password": "123456",
+      "class": "6"
+    },
+    {
+      "uid": "13",
+      "fullname": "AJAY",
+      "email": "ajay@gmail.com",
+      "password": "12345678",
+      "class": "7"
+    },
+    {
+      "uid": "14",
+      "fullname": "SAI",
+      "email": "sai@gmail.com",
+      "password": "123456",
+      "class": "7"
+    },
+    {
+      "uid": "15",
+      "fullname": "TEJA",
+      "email": "22x01a6212@nrcmec.org",
+      "password": "123456",
+      "class": "10"
+    }
+  ],
+  "teachers": [
+    {
+      "uid": "21",
+      "fullname": "nikhil",
+      "email": "nikki@gmail.com",
+      "password": "123456"
+    }
+  ],
+  "scores": [
+    {
+      "score": "65.68",
+      "subject": "math",
+      "timestamp": "2025-12-24T14:56:46.822Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "36.00",
+      "subject": "math",
+      "timestamp": "2025-12-24T15:00:19.331Z",
+      "student_uid": "12"
+    },
+    {
+      "score": "18.88",
+      "subject": "math",
+      "timestamp": "2025-12-24T15:05:00.026Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 35,
+      "subject": "physics",
+      "timestamp": "2025-12-24T15:09:20.291Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "7.36",
+      "subject": "math",
+      "timestamp": "2025-12-24T15:13:13.157Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 40,
+      "subject": "physics",
+      "timestamp": "2025-12-24T15:15:12.436Z",
+      "student_uid": "12"
+    },
+    {
+      "score": 50,
+      "subject": "physics",
+      "timestamp": "2025-12-24T15:18:29.285Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 40,
+      "subject": "physics",
+      "timestamp": "2025-12-24T15:19:09.427Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 65,
+      "subject": "physics",
+      "timestamp": "2025-12-24T15:23:02.559Z",
+      "student_uid": "12"
+    },
+    {
+      "score": 82,
+      "subject": "social",
+      "timestamp": "2025-12-24T15:26:31.125Z",
+      "student_uid": "12"
+    },
+    {
+      "score": 94.875,
+      "subject": "social",
+      "timestamp": "2025-12-24T15:29:59.701Z",
+      "student_uid": "12"
+    },
+    {
+      "score": 65,
+      "subject": "physics",
+      "timestamp": "2025-12-25T12:37:17.934Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 18,
+      "subject": "biology",
+      "timestamp": "2025-12-25T12:47:48.283Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 60,
+      "subject": "physics",
+      "timestamp": "2025-12-25T12:48:44.924Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 63,
+      "subject": "biology",
+      "timestamp": "2025-12-25T12:49:36.253Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "66.80",
+      "subject": "math",
+      "timestamp": "2025-12-25T12:56:05.705Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "23.76",
+      "subject": "math",
+      "timestamp": "2025-12-25T12:59:54.097Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "13.68",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:00:59.952Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "29.12",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:01:59.839Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "12.08",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:02:22.831Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "11.20",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:04:11.604Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "9.84",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:06:45.754Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "57.68",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:11:44.597Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 82,
+      "subject": "social",
+      "timestamp": "2025-12-25T13:15:58.653Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 52,
+      "subject": "biology",
+      "timestamp": "2025-12-25T13:27:22.609Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "62.72",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:42:23.859Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "23.60",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:43:23.652Z",
+      "student_uid": "13"
+    },
+    {
+      "score": "12.88",
+      "subject": "math",
+      "timestamp": "2025-12-25T13:43:56.268Z",
+      "student_uid": "13"
+    },
+    {
+      "score": 70,
+      "subject": "biology",
+      "timestamp": "2025-12-25T14:17:45.916Z",
+      "student_uid": "12"
+    },
+    {
+      "score": "127.52",
+      "subject": "math",
+      "timestamp": "2025-12-25T19:05:49.193Z",
+      "student_uid": "12"
+    },
+    {
+      "score": 0,
+      "subject": "science",
+      "timestamp": "2025-12-26T05:15:55.899Z",
+      "student_uid": "14"
+    },
+    {
+      "score": 0,
+      "subject": "chemistry",
+      "timestamp": "2025-12-26T05:15:55.899Z",
+      "student_uid": "14"
+    },
+    {
+      "score": 68,
+      "subject": "biology",
+      "timestamp": "2025-12-26T05:17:03.724Z",
+      "student_uid": "14"
+    },
+    {
+      "score": 70,
+      "subject": "physics",
+      "timestamp": "2025-12-26T05:19:08.398Z",
+      "student_uid": "14"
+    },
+    {
+      "score": 92,
+      "subject": "social",
+      "timestamp": "2025-12-26T05:23:04.391Z",
+      "student_uid": "14"
+    },
+    {
+      "score": "130.48",
+      "subject": "math",
+      "timestamp": "2025-12-26T05:30:18.493Z",
+      "student_uid": "14"
+    },
+    {
+      "score": 50,
+      "subject": "english",
+      "timestamp": "2025-12-26T05:32:05.636Z",
+      "student_uid": "14"
+    },
+    {
+      "score": 43,
+      "subject": "biology",
+      "timestamp": "2025-12-26T05:38:15.393Z",
+      "student_uid": "14"
+    },
+    {
+      "score": 0,
+      "subject": "math",
+      "timestamp": "2025-12-26T05:41:23.277Z",
+      "student_uid": "15"
+    },
+    {
+      "score": 0,
+      "subject": "science",
+      "timestamp": "2025-12-26T05:41:23.277Z",
+      "student_uid": "15"
+    },
+    {
+      "score": 0,
+      "subject": "social",
+      "timestamp": "2025-12-26T05:41:23.277Z",
+      "student_uid": "15"
+    },
+    {
+      "score": 0,
+      "subject": "english",
+      "timestamp": "2025-12-26T05:41:23.277Z",
+      "student_uid": "15"
+    },
+    {
+      "score": 0,
+      "subject": "physics",
+      "timestamp": "2025-12-26T05:41:23.277Z",
+      "student_uid": "15"
+    },
+    {
+      "score": 0,
+      "subject": "chemistry",
+      "timestamp": "2025-12-26T05:41:23.277Z",
+      "student_uid": "15"
+    },
+    {
+      "score": 0,
+      "subject": "biology",
+      "timestamp": "2025-12-26T05:41:23.277Z",
+      "student_uid": "15"
+    }
+  ],
+  "subjects": {
+    "math": {
+      "avg_score": "40.42"
+    },
+    "biology": {
+      "avg_score": "62.25"
+    },
+    "english": {
+      "avg_score": "35.60"
+    },
+    "physics": {
+      "avg_score": "36.67"
+    },
+    "social": {
+      "avg_score": "107.67"
+    }
+  }
+}
