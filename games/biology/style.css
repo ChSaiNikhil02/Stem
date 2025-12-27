@@ -155,8 +155,8 @@ header h1 {
 #heart-zone   { top: 282px; left: 255px; width: 66px; height: 66px; }
 #kidney-zone  { top: 440px; left: 280px; width: 35px; height: 40px; }
 #liver-zone  { top: 400px; left: 235px; width: 45px; height: 40px; }
-#hand-zone    { top: 375px; left: 72px;  height: 190px; }
-#leg-zone     { top: 638px; left: 203px; width: 73px; }
+#hand-zone    { top: 375px; left: 70px; width: 150px; height: 190px; }
+#leg-zone     { top: 638px; left: 203px; width: 73px; height: 200px; }
 
 
 /* Footer and Controls */
