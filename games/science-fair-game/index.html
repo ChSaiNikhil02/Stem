@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Science Drop Game</title>
+
+<style>
+/* ================= GLOBAL ================= */
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle, #56ccf2, #2f80ed);
+  overflow: hidden;
+}
+
+/* ================= FIXED TIMER BAR ================= */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 9999; /* GUARANTEED VISIBILITY */
+}
+
+/* ================= GAME AREA ================= */
+.game-container {
+  width: 820px;
+  height: 820px;
+  margin: 70px auto 0; /* space for timer bar */
+  position: relative;
+}
+
+/* ================= QUESTION ================= */
+.question-box {
+  width: 320px;
+  height: 160px;
+  background: #fff;
+  border: 4px dashed #111;
+  border-radius: 18px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* ================= OPTIONS ================= */
+.option {
+  width: 135px;
+  height: 48px;
+  background: #ffe066;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 48px;
+  font-weight: bold;
+  cursor: grab;
+  position: absolute;
+  user-select: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.option.hidden {
+  visibility: hidden;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ✅ TIMER BAR (ALWAYS VISIBLE) -->
+<div class="top-bar">
+  ⏱ Time: <span id="time">60</span>
+  ⭐ Score: <span id="score">0</span>
+</div>
+
+<div class="game-container">
+
+  <div class="question-box" id="questionBox">Loading...</div>
+
+  <!-- 12 OPTIONS AROUND CENTER -->
+  <div class="option" draggable="true" style="top:570px; left:230px;"></div>
+  <div class="option" draggable="true" style="top:570px; left:470px;"></div>
+  <div class="option" draggable="true" style="top:570px; left:20px;"></div>
+  <div class="option" draggable="true" style="top:70px; left:470px;"></div>
+  <div class="option" draggable="true" style="top:70px; left:230px;"></div>
+  <div class="option" draggable="true" style="top:470px; left:20px;"></div>
+  <div class="option" draggable="true" style="top:370px; left:20px;"></div>
+  <div class="option" draggable="true" style="top:270px; left:20px;"></div>
+  <div class="option" draggable="true" style="top:170px; left:20px;"></div>
+  <div class="option" draggable="true" style="top:470px; left:230px;"></div>
+  <div class="option" draggable="true" style="top:470px; left:470px;"></div>
+  
+  <div class="option" draggable="true" style="top:70px; left:20px;"></div>
+  <div class="option" draggable="true" style="top:170px; left:230px;"></div>
+  <div class="option" draggable="true" style="top:170px; left:470px;"></div>
+
+  <div class="option" draggable="true" style="top:70px; left:670px;"></div>
+  <div class="option" draggable="true" style="top:170px; left:670px;"></div>
+  <div class="option" draggable="true" style="top:270px; left:670px;"></div>
+  <div class="option" draggable="true" style="top:370px; left:670px;"></div>
+  <div class="option" draggable="true" style="top:470px; left:670px;"></div>
+  <div class="option" draggable="true" style="top:570px; left:670px;"></div>
+
+</div>
+
+<script>
+/* ================= QUESTIONS ================= */
+const allQuestions = [
+  { q: "Which object attracts iron?", a: "Magnet" },
+  { q: "Which tool helps us see distant stars?", a: "Telescope" },
+  { q: "Which instrument measures temperature?", a: "Thermometer" },
+  { q: "Which tool helps us see tiny objects?", a: "Microscope" },
+  { q: "Which object gives us light during the day?", a: "Sun" },
+  { q: "Which gas is needed for breathing?", a: "Oxygen" },
+  { q: "Which part of a plant makes food?", a: "Leaf" },
+  { q: "Which force pulls objects towards Earth?", a: "Gravity" },
+  { q: "Which organ pumps blood in the body?", a: "Heart" },
+  { q: "Which natural satellite orbits the Earth?", a: "Moon" },
+
+  { q: "Which device stores electrical energy?", a: "Battery" },
+  { q: "Which process makes food in plants?", a: "Photosynthesis" },
+  { q: "Which organ helps us breathe?", a: "Lungs" },
+  { q: "Which part of the body helps us think?", a: "Brain" },
+  { q: "Which planet is known as the Red Planet?", a: "Mars" },
+  { q: "Which gas do plants release during photosynthesis?", a: "Oxygen" },
+  { q: "Which form of energy comes from the sun?", a: "Solar energy" },
+  { q: "Which state of water is ice?", a: "Solid" },
+  { q: "Which state of water is steam?", a: "Gas" },
+  { q: "Which state of water is liquid?", a: "Liquid" },
+
+  { q: "Which material allows electricity to pass through?", a: "Conductor" },
+  { q: "Which material does not allow electricity to pass?", a: "Insulator" },
+  { q: "Which sense organ helps us see?", a: "Eyes" },
+  { q: "Which sense organ helps us hear?", a: "Ears" },
+  { q: "Which sense organ helps us smell?", a: "Nose" },
+  { q: "Which sense organ helps us taste?", a: "Tongue" },
+  { q: "Which sense organ helps us feel touch?", a: "Skin" },
+  { q: "Which gas is most abundant in air?", a: "Nitrogen" },
+  { q: "Which layer of Earth supports life?", a: "Crust" },
+  { q: "Which part of a plant absorbs water?", a: "Roots" },
+
+  { q: "Which planet is closest to the Sun?", a: "Mercury" },
+  { q: "Which planet is the largest in the solar system?", a: "Jupiter" },
+  { q: "Which star is closest to Earth?", a: "Sun" },
+  { q: "Which device produces light using electricity?", a: "Bulb" },
+  { q: "Which simple machine is a seesaw?", a: "Lever" },
+  { q: "Which simple machine is used to draw water from a well?", a: "Pulley" },
+  { q: "Which form of energy produces sound?", a: "Sound energy" },
+  { q: "Which energy makes objects move?", a: "Mechanicalenergy" },
+  { q: "Which type of energy produces heat?", a: "Heat energy" },
+  { q: "Which object reflects light?", a: "Mirror" },
+
+  { q: "Which process changes water into vapor?", a: "Evaporation" },
+  { q: "Which process changes vapor into water?", a: "Condensation" },
+  { q: "Which process causes rainfall?", a: "Precipitation" },
+  { q: "Which layer of atmosphere protects us from harmful rays?", a: "Ozone layer" },
+  { q: "Which organ helps in digestion?", a: "Stomach" },
+  { q: "Which mineral is required for strong bones?", a: "Calcium" },
+  { q: "Which vitamin is produced by sunlight?", a: "Vitamin D" },
+  { q: "Which animal is known as an amphibian?", a: "Frog" },
+  { q: "Which type of animals eat only plants?", a: "Herbivores" },
+  { q: "Which type of animals eat only meat?", a: "Carnivores" },
+
+  { q: "Which type of animals eat both plants and meat?", a: "Omnivores" },
+  { q: "Which organ filters blood in the body?", a: "Kidney" },
+  { q: "Which gas is responsible for global warming?", a: "Carbon dioxide" },
+  { q: "Which natural resource is used to make paper?", a: "Wood" },
+  { q: "Which part of Earth contains molten rock?", a: "Mantle" },
+  { q: "Which tool is used to measure weight?", a: "Weighing scale" },
+  { q: "Which instrument measures time?", a: "Clock" },
+  { q: "Which device helps us see objects far away on Earth?", a: "Binoculars" },
+  { q: "Which energy is stored in food?", a: "Chemical energy" },
+  { q: "Which gas is released when fuels burn?", a: "Carbon dioxide" },
+
+  { q: "Which device is used to measure wind speed?", a: "Anemometer" },
+  { q: "Which device shows direction?", a: "Compass" },
+  { q: "Which process breaks food into simpler substances?", a: "Digestion" },
+  { q: "Which planet has rings around it?", a: "Saturn" },
+  { q: "Which water source is the largest on Earth?", a: "Ocean" },
+  { q: "Which form of energy travels as waves?", a: "Light energy" },
+  { q: "Which organ controls all body activities?", a: "Brain" },
+  { q: "Which gas is used by plants to make food?", a: "Carbon dioxide" },
+  { q: "Which natural phenomenon produces thunder and lightning?", a: "Storm" },
+  { q: "Which object always shows the same face to Earth?", a: "Moon" }
+];
+
+
+/* ================= FIXED OPTIONS ================= */
+const fixedOptions = [
+  "Magnet","Thermometer","Microscope","Sun","Oxygen","Leaf","Gravity","Heart",
+  "Moon","Battery","Photosynthesis","Telescope","Lungs","Brain","Mars",
+  "Solid","Gas","Liquid","Conductor","Insulator","Eyes","Ears","Nose",
+  "Tongue","Skin","Nitrogen","Crust","Roots","Mercury","Jupiter","Bulb",
+  "Lever","Pulley","Sound energy","Mechanicalenergy","Heat energy","Mirror",
+  "Evaporation","Condensation","Precipitation","Ozone layer","Stomach",
+  "Calcium","Vitamin D","Frog","Herbivores","Carnivores","Omnivores","Kidney",
+  "Carbon dioxide","Wood","Mantle","Weighing scale","Clock","Binoculars",
+  "Chemical energy","Anemometer","Compass","Digestion","Saturn","Ocean",
+  "Light energy","Storm"
+];
+
+/* ================= GAME STATE ================= */
+const OPTIONS_PER_GAME = document.querySelectorAll(".option").length;
+
+let visibleOptions = [];
+let validQuestions = [];
+let currentQuestion = null;
+let draggedOption = null;
+
+let score = 0;
+let timeLeft = 150;
+
+/* DOM */
+const questionBox = document.getElementById("questionBox");
+const scoreEl = document.getElementById("score");
+const timeEl = document.getElementById("time");
+const optionEls = document.querySelectorAll(".option");
+
+/* ================= INIT GAME ================= */
+startGame();
+
+function startGame() {
+  pickRandomOptions();
+  filterQuestions();
+  nextQuestion();
+  startTimer();
+}
+
+/* ================= PICK RANDOM OPTIONS ================= */
+function pickRandomOptions() {
+  visibleOptions = shuffle([...fixedOptions]).slice(0, OPTIONS_PER_GAME);
+
+  optionEls.forEach((opt, i) => {
+    opt.textContent = visibleOptions[i];
+    opt.dataset.value = visibleOptions[i];
+    opt.classList.remove("hidden");
+    opt.setAttribute("draggable", true);
+  });
+}
+
+/* ================= FILTER QUESTIONS ================= */
+function filterQuestions() {
+  validQuestions = allQuestions.filter(q =>
+    visibleOptions.includes(q.a)
+  );
+}
+
+/* ================= NEXT QUESTION ================= */
+function nextQuestion() {
+  if (validQuestions.length === 0) {
+    questionBox.textContent = "🎉 Congragulations you have answered all questions!";
+    saveScore();
+    return;
+  }
+
+  currentQuestion = validQuestions[
+    Math.floor(Math.random() * validQuestions.length)
+  ];
+  questionBox.textContent = currentQuestion.q;
+}
+
+/* ================= DRAG & DROP ================= */
+optionEls.forEach(opt => {
+  opt.addEventListener("dragstart", e => {
+    if (opt.classList.contains("hidden")) return;
+    draggedOption = opt;
+    e.dataTransfer.setData("text", opt.dataset.value);
+  });
+});
+
+questionBox.addEventListener("dragover", e => e.preventDefault());
+
+questionBox.addEventListener("drop", e => {
+  e.preventDefault();
+  if (!draggedOption) return;
+
+  if (draggedOption.dataset.value === currentQuestion.a) {
+    score += 5;
+    scoreEl.textContent = score;
+
+    // hide correct option
+    draggedOption.classList.add("hidden");
+
+    // remove related questions
+    validQuestions = validQuestions.filter(
+      q => q.a !== draggedOption.dataset.value
+    );
+
+    nextQuestion();
+  }
+});
+
+/* ================= TIMER ================= */
+function startTimer() {
+  timeEl.textContent = timeLeft;
+
+  const timer = setInterval(() => {
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      questionBox.textContent = `⏰ Time Over! Final Score: ${score}`;
+      optionEls.forEach(o => o.setAttribute("draggable", false));
+      saveScore();
+    }
+  }, 1000);
+}
+
+/* ================= SAVE SCORE ================= */
+function saveScore() {
+    fetch('/save-score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ score: score, subject: 'science' }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log('Score saved successfully:', data);
+    })
+    .catch((error) => {
+        console.error('Error saving score:', error);
+    });
+}
+
+/* ================= UTILS ================= */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+</script>
+
+</body>
+</html>
